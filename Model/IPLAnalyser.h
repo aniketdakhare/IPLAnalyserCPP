@@ -1,7 +1,7 @@
 #pragma once
-#include <iostream>
 #include <list>
 #include "IPLMostRunsCSV.h"
+#include "SortType.h"
 #include "../Libraries/CSVReader.h"
 
 using namespace std;
@@ -12,7 +12,7 @@ class IPLAnalyser
         list<IPLBatsmanData> iplMostRunsList;
     public:
         void loadIPLData(string fileName);
-        list<IPLBatsmanData> getSortedDataAsPerBattingAverage();
+        list<IPLBatsmanData> getSortedData(SortType sortType);
 };
 
 void IPLAnalyser :: loadIPLData(string fileName)
@@ -34,9 +34,19 @@ void IPLAnalyser :: loadIPLData(string fileName)
     }
 }
 
-list<IPLBatsmanData> IPLAnalyser :: getSortedDataAsPerBattingAverage()
+list<IPLBatsmanData> IPLAnalyser :: getSortedData(SortType sortType)
 {
-    iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
-    {return (firstBatsman.average == secondBatsman.average) ? &firstBatsman > &secondBatsman : firstBatsman.average > secondBatsman.average; });
+    switch(sortType)
+    {
+        case AVERAGE:
+            iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
+            {return (firstBatsman.average == secondBatsman.average) ? &firstBatsman > &secondBatsman : firstBatsman.average > secondBatsman.average; });
+            break;
+        case STRIKE_RATE:
+            iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
+            {return (firstBatsman.strikeRate == secondBatsman.strikeRate) ? &firstBatsman > &secondBatsman : firstBatsman.strikeRate > secondBatsman.strikeRate; });
+            break;
+    }
+    
     return iplMostRunsList;
 }

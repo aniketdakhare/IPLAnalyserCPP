@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../view/IPLAnalyserView.h"
 #include "../model/IPLAnalyser.h"
 
@@ -12,11 +11,36 @@ class IPLAnalyserController
     IPLAnalyser iplAnalyser;
 
     public:
-        void displayTopAvgBtasmanData() 
+        void displaySortedData() 
         {
+            list<IPLBatsmanData> sortedList;
             iplIO.displayWelcomeMessage();
             iplAnalyser.loadIPLData(MOST_RUNS_FILE_PATH); 
-            iplIO.displayTopAvgBatsman(iplAnalyser.getSortedDataAsPerBattingAverage());
+
+            while (true)
+            {
+                SortType sortType;
+                string heading;
+                int choice = iplIO.getChoiceOfSorting();
+
+                switch (choice)
+                {
+                    case 1:
+                        sortType = SortType::AVERAGE;
+                        heading = "\n#### TOP BATTING AVERAGES ####";
+                        break;
+                    case 2:
+                        sortType = SortType::STRIKE_RATE;
+                        heading = "\n#### TOP STRIKE RATE ####";
+                        break;
+                    case 3:
+                        exit(0);
+                    default:
+                        iplIO.defaultMassege();
+                }
+
+                iplIO.displayTopAvgBatsman(iplAnalyser.getSortedData(sortType), heading);
+            }
         }
 };
 
@@ -24,6 +48,6 @@ int main()
 {
     IPLAnalyserController controller;
 
-    controller.displayTopAvgBtasmanData();
+    controller.displaySortedData();
     return 0;
 }
