@@ -34,7 +34,7 @@ int IPLAnalyserView :: getChoiceOfSorting()
 {
     int choice;
     cout << "\nSelect Choice for displaying data: \n1: Top batting averages of the Cricketers \n2: Top Striking rate of batsman"
-    << "\n3: Cricketers who hit maximum 6s and 4s \n4: Exit" << endl;
+    << "\n3: Cricketers who hit maximum 6s and 4s \n4: Cricketers who had best striking rates with 6s and 4s \n5: Exit" << endl;
     cin >> choice;
     return choice;
 }

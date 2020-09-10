@@ -27,7 +27,10 @@ class IPLAnalyserController
                 case FOURS_AND_SIXES:
                     sortedList = iplAnalyser.getSortedData(FOURS_AND_SIXES);
                     break;
-                case 4:
+                case STRIKE_RATE_WITH_SIX_AND_FOUR:
+                    sortedList = iplAnalyser.getSortedData(STRIKE_RATE_WITH_SIX_AND_FOUR);
+                    break;
+                case 5:
                     exit(0);
                 default:
                     iplIO.defaultMassege();

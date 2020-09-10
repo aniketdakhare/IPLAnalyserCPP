@@ -40,16 +40,19 @@ list<IPLBatsmanData> IPLAnalyser :: getSortedData(SortType sortType)
     {
         case AVERAGE:
             iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
-            {return (firstBatsman.average == secondBatsman.average) ? &firstBatsman > &secondBatsman : firstBatsman.average > secondBatsman.average; });
+            {return firstBatsman.average > secondBatsman.average; });
             break;
         case STRIKE_RATE:
             iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
-            {return (firstBatsman.strikeRate == secondBatsman.strikeRate) ? &firstBatsman > &secondBatsman : firstBatsman.strikeRate > secondBatsman.strikeRate; });
+            {return firstBatsman.strikeRate > secondBatsman.strikeRate; });
             break;
         case FOURS_AND_SIXES:
             iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
-            {return ((firstBatsman.fours + firstBatsman.sixes) == (secondBatsman.fours +secondBatsman.sixes)) ? &firstBatsman > &secondBatsman :
-            (firstBatsman.fours + firstBatsman.sixes) > (secondBatsman.fours +secondBatsman.sixes); });
+            {return (firstBatsman.fours + firstBatsman.sixes) > (secondBatsman.fours +secondBatsman.sixes); });
+            break;
+        case STRIKE_RATE_WITH_SIX_AND_FOUR:
+            iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
+            {return firstBatsman.strikeRate > secondBatsman.strikeRate && (firstBatsman.fours + firstBatsman.sixes) > (secondBatsman.fours +secondBatsman.sixes); });
             break;
     }
     
