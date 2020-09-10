@@ -2,5 +2,5 @@
 
 enum SortType
 {
-    AVERAGE = 1, STRIKE_RATE
+    AVERAGE = 1, STRIKE_RATE, FOURS_AND_SIXES
 };

@@ -46,6 +46,11 @@ list<IPLBatsmanData> IPLAnalyser :: getSortedData(SortType sortType)
             iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
             {return (firstBatsman.strikeRate == secondBatsman.strikeRate) ? &firstBatsman > &secondBatsman : firstBatsman.strikeRate > secondBatsman.strikeRate; });
             break;
+        case FOURS_AND_SIXES:
+            iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
+            {return ((firstBatsman.fours + firstBatsman.sixes) == (secondBatsman.fours +secondBatsman.sixes)) ? &firstBatsman > &secondBatsman :
+            (firstBatsman.fours + firstBatsman.sixes) > (secondBatsman.fours +secondBatsman.sixes); });
+            break;
     }
     
     return iplMostRunsList;

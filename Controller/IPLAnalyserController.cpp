@@ -10,36 +10,41 @@ class IPLAnalyserController
     IPLAnalyserView iplIO;
     IPLAnalyser iplAnalyser;
 
+    private:
+        list<IPLBatsmanData> getSortedListOfPlayersData()
+        {
+            list<IPLBatsmanData> sortedList;
+            int choice = iplIO.getChoiceOfSorting();
+            
+            switch (choice)
+            {
+                case AVERAGE:
+                    sortedList = iplAnalyser.getSortedData(AVERAGE);
+                    break;
+                case STRIKE_RATE:
+                    sortedList = iplAnalyser.getSortedData(STRIKE_RATE);
+                    break;
+                case FOURS_AND_SIXES:
+                    sortedList = iplAnalyser.getSortedData(FOURS_AND_SIXES);
+                    break;
+                case 4:
+                    exit(0);
+                default:
+                    iplIO.defaultMassege();
+            }
+            
+            return sortedList;;
+        }
+
     public:
         void displaySortedData() 
         {
-            list<IPLBatsmanData> sortedList;
             iplIO.displayWelcomeMessage();
             iplAnalyser.loadIPLData(MOST_RUNS_FILE_PATH); 
 
             while (true)
             {
-                SortType sortType;
-                string heading;
-                int choice = iplIO.getChoiceOfSorting();
-
-                switch (choice)
-                {
-                    case 1:
-                        sortType = SortType::AVERAGE;
-                        heading = "\n#### TOP BATTING AVERAGES ####";
-                        break;
-                    case 2:
-                        sortType = SortType::STRIKE_RATE;
-                        heading = "\n#### TOP STRIKE RATE ####";
-                        break;
-                    case 3:
-                        exit(0);
-                    default:
-                        iplIO.defaultMassege();
-                }
-
-                iplIO.displayTopAvgBatsman(iplAnalyser.getSortedData(sortType), heading);
+                iplIO.displayTopAvgBatsman(getSortedListOfPlayersData());
             }
         }
 };
