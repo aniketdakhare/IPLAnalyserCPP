@@ -36,25 +36,30 @@ void IPLAnalyser :: loadIPLData(string fileName)
 
 list<IPLBatsmanData> IPLAnalyser :: getSortedData(SortType sortType)
 {
+    list<IPLBatsmanData> playersList = iplMostRunsList;
     switch(sortType)
     {
         case AVERAGE:
-            iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
+            playersList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
             {return firstBatsman.average > secondBatsman.average; });
             break;
         case STRIKE_RATE:
-            iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
+            playersList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
             {return firstBatsman.strikeRate > secondBatsman.strikeRate; });
             break;
         case FOURS_AND_SIXES:
-            iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
+            playersList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
             {return (firstBatsman.fours + firstBatsman.sixes) > (secondBatsman.fours +secondBatsman.sixes); });
             break;
         case STRIKE_RATE_WITH_SIX_AND_FOUR:
-            iplMostRunsList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
+            playersList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
             {return firstBatsman.strikeRate > secondBatsman.strikeRate && (firstBatsman.fours + firstBatsman.sixes) > (secondBatsman.fours +secondBatsman.sixes); });
+            break;
+        case BATTING_AVERAGE_WITH_STRIKE_RATE:
+            playersList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
+            {return firstBatsman.average > secondBatsman.average && firstBatsman.strikeRate > secondBatsman.strikeRate; });
             break;
     }
     
-    return iplMostRunsList;
+    return playersList;
 }
