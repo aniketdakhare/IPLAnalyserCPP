@@ -81,6 +81,9 @@ list<IPLPlayerDetails> IPLAnalyser :: getSortedData(SortType sortType)
         case MOST_RUNS_AND_WICKETS:
             sortDataByWicketsAndRuns(playersList, iplMostRunsList, iplMostWicketsList);
             break;
+        case HUNDRED_AND_AVERAGE:
+            sortDataByHundredsAndAverage(playersList, iplMostRunsList);
+            break;
     }
     
     return playersList;
