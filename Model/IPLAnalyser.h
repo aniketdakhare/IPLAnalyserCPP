@@ -95,6 +95,12 @@ list<IPLPlayerDetails> IPLAnalyser :: getSortedData(SortType sortType)
             {return ((firstBatsman.bowlingAverage != 0 && secondBatsman.bowlingAverage != 0) ? firstBatsman.bowlingAverage < secondBatsman.bowlingAverage : bool()) &&
             ((firstBatsman.bowlingStrikeRates != 0 && secondBatsman.bowlingStrikeRates != 0) ? firstBatsman.bowlingStrikeRates < secondBatsman.bowlingStrikeRates : bool()); });
             break;
+        case WICKETS_WITH_BOWLING_AVERAGE:
+            playersList = iplMostWicketsList;
+            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
+            {return ((firstBatsman.bowlingAverage != 0 && secondBatsman.bowlingAverage != 0) ? firstBatsman.bowlingAverage < secondBatsman.bowlingAverage : bool()) &&
+            firstBatsman.wickets > secondBatsman.wickets; });
+            break;
     }
     
     return playersList;
