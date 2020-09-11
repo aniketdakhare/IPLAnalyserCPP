@@ -63,7 +63,12 @@ class IPLAnalyserController
                     case STRIKE_RATE_WITH_FOUR_AND_FIVE_WICKETS:
                         sortedList = iplAnalyser.getSortedData(STRIKE_RATE_WITH_FOUR_AND_FIVE_WICKETS);
                         iplIO.displayBowler(sortedList);
-                        break;       
+                        break;
+                    case BOWLING_AVERAGE_WITH_STRIKE_RATE:
+                        sortedList = iplAnalyser.getSortedData(BOWLING_AVERAGE_WITH_STRIKE_RATE);
+                        iplIO.displayBowler(sortedList);
+                        break;
+                    case 12:
                         exit(0);
                     default:
                         iplIO.defaultMassege();
