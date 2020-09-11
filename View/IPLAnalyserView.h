@@ -51,7 +51,7 @@ int IPLAnalyserView :: getChoiceOfSorting()
     << "\n3: Cricketers who hit maximum 6s and 4s \n4: Cricketers who had best striking rates with 6s and 4s"
     << "\n5: Cricketers who had great averages with the best striking rates possible"
     << "\n6: Cricketers who hit maximum runs with best averages \n7: Top bowling averages of the Cricketers "
-    << "\n8: Top Striking Rates of the Bowlers \n9: Exit" << endl;
+    << "\n8: Top Striking Rates of the Bowlers \n9: Bowlers who had the best economy rate \n10: Exit" << endl;
     cin >> choice;
     return choice;
 }
