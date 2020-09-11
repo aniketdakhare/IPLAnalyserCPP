@@ -30,7 +30,13 @@ class IPLAnalyserController
                 case STRIKE_RATE_WITH_SIX_AND_FOUR:
                     sortedList = iplAnalyser.getSortedData(STRIKE_RATE_WITH_SIX_AND_FOUR);
                     break;
-                case 5:
+                case BATTING_AVERAGE_WITH_STRIKE_RATE:
+                    sortedList = iplAnalyser.getSortedData(BATTING_AVERAGE_WITH_STRIKE_RATE);
+                    break;
+                case RUNS_WITH_BATTING_AVERAGE:
+                    sortedList = iplAnalyser.getSortedData(RUNS_WITH_BATTING_AVERAGE);
+                    break;
+                case 7:
                     exit(0);
                 default:
                     iplIO.defaultMassege();
