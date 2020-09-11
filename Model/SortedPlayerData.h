@@ -23,6 +23,7 @@ class SortedPlayerData
         void sortDataByWicketsWithBowlingAverage(list<IPLPlayerDetails>& , list<IPLPlayerDetails>);
         void sortDataByBowlingAndBattingAverage(list<IPLPlayerDetails>& , list<IPLPlayerDetails> , list<IPLPlayerDetails>);
         void sortDataByWicketsAndRuns(list<IPLPlayerDetails>& , list<IPLPlayerDetails> , list<IPLPlayerDetails>);
+        void sortDataByHundredsAndAverage(list<IPLPlayerDetails>& , list<IPLPlayerDetails>);
 };
 
 void SortedPlayerData :: sortDataByBattingAverage(list<IPLPlayerDetails>& playersList, list<IPLPlayerDetails> iplMostRunsList)
@@ -151,4 +152,11 @@ void SortedPlayerData :: sortDataByWicketsAndRuns(list<IPLPlayerDetails>& player
 
     playersList.sort([](const IPLPlayerDetails firstPlayer, const IPLPlayerDetails secondPlayer)
     {return  firstPlayer.wickets > secondPlayer.wickets && firstPlayer.runs > secondPlayer.runs; });
+}
+
+void SortedPlayerData :: sortDataByHundredsAndAverage(list<IPLPlayerDetails>& playersList, list<IPLPlayerDetails> iplMostRunsList)
+{
+    playersList = iplMostRunsList;
+    playersList.sort([](const IPLPlayerDetails firstPlayer, const IPLPlayerDetails secondPlayer)
+    {return firstPlayer.hundreds > secondPlayer.hundreds && firstPlayer.fifties > secondPlayer.fifties; });
 }

@@ -80,7 +80,11 @@ class IPLAnalyserController
                         sortedList = iplAnalyser.getSortedData(MOST_RUNS_AND_WICKETS);
                         iplIO.displayAllrounder(sortedList);
                         break;
-                    case 15:
+                    case HUNDRED_AND_AVERAGE:
+                        sortedList = iplAnalyser.getSortedData(HUNDRED_AND_AVERAGE);
+                        iplIO.displayBatsman(sortedList);
+                        break;
+                    case 16:
                         exit(0);
                     default:
                         iplIO.defaultMassege();

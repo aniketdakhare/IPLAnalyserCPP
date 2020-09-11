@@ -11,6 +11,8 @@ class IPLPlayerDetails
         double bowlingAverage;
         double battingStrikeRates;
         double bowlingStrikeRates;
+        int hundreds;
+        int fifties;
         int fours;
         int sixes;
         int runs;

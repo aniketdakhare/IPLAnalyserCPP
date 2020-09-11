@@ -24,6 +24,8 @@ class IPLMostRunsAdapter : public IPLAdapter
                 player.battingStrikeRates = stod((*playerDetails).at(9));
                 player.fours = stoi((*playerDetails).at(12));
                 player.sixes = stoi((*playerDetails).at(13));
+                player.hundreds = stoi((*playerDetails).at(10));
+                player.fifties = stoi((*playerDetails).at(11));
 
                 iplPlayersList.push_back(player);
             }
