@@ -78,6 +78,9 @@ list<IPLPlayerDetails> IPLAnalyser :: getSortedData(SortType sortType)
         case BATTING_AND_BOWLING_AVERAGE:
             sortDataByBowlingAndBattingAverage(playersList, iplMostRunsList, iplMostWicketsList);
             break;
+        case MOST_RUNS_AND_WICKETS:
+            sortDataByWicketsAndRuns(playersList, iplMostRunsList, iplMostWicketsList);
+            break;
     }
     
     return playersList;

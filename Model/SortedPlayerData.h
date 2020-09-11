@@ -5,6 +5,9 @@ using namespace std;
 
 class SortedPlayerData
 {
+    private:
+        list<IPLPlayerDetails> getAllrounderPlayers(list<IPLPlayerDetails> , list<IPLPlayerDetails>);
+
     protected:
         void sortDataByBattingAverage(list<IPLPlayerDetails>& , list<IPLPlayerDetails>);
         void sortDataByBattingStrikeRate(list<IPLPlayerDetails>& , list<IPLPlayerDetails>);
@@ -18,7 +21,8 @@ class SortedPlayerData
         void sortDataByStrikeRateWithFourAndFiveWickets(list<IPLPlayerDetails>& , list<IPLPlayerDetails>);
         void sortDataByBowlingAverageWithStrikeRate(list<IPLPlayerDetails>& , list<IPLPlayerDetails>);
         void sortDataByWicketsWithBowlingAverage(list<IPLPlayerDetails>& , list<IPLPlayerDetails>);
-        void sortDataByBowlingAndBattingAverage(list<IPLPlayerDetails>& , list<IPLPlayerDetails> , list<IPLPlayerDetails> );
+        void sortDataByBowlingAndBattingAverage(list<IPLPlayerDetails>& , list<IPLPlayerDetails> , list<IPLPlayerDetails>);
+        void sortDataByWicketsAndRuns(list<IPLPlayerDetails>& , list<IPLPlayerDetails> , list<IPLPlayerDetails>);
 };
 
 void SortedPlayerData :: sortDataByBattingAverage(list<IPLPlayerDetails>& playersList, list<IPLPlayerDetails> iplMostRunsList)
@@ -109,8 +113,9 @@ void SortedPlayerData :: sortDataByWicketsWithBowlingAverage(list<IPLPlayerDetai
     firstPlayer.wickets > secondPlayer.wickets; });
 }
 
-void SortedPlayerData :: sortDataByBowlingAndBattingAverage(list<IPLPlayerDetails>& playersList, list<IPLPlayerDetails> iplMostRunsList, list<IPLPlayerDetails> iplMostWicketsList)
+list<IPLPlayerDetails> SortedPlayerData :: getAllrounderPlayers(list<IPLPlayerDetails> iplMostRunsList, list<IPLPlayerDetails> iplMostWicketsList)
 {
+    list<IPLPlayerDetails> playersList;
     for (auto battingData = iplMostRunsList.begin(); battingData != iplMostRunsList.end(); battingData++)
     {
         for (auto bowlingData = iplMostWicketsList.begin(); bowlingData != iplMostWicketsList.end(); bowlingData++)
@@ -128,7 +133,22 @@ void SortedPlayerData :: sortDataByBowlingAndBattingAverage(list<IPLPlayerDetail
         }
     }
 
+    return playersList;
+}
+
+void SortedPlayerData :: sortDataByBowlingAndBattingAverage(list<IPLPlayerDetails>& playersList, list<IPLPlayerDetails> iplMostRunsList, list<IPLPlayerDetails> iplMostWicketsList)
+{
+    playersList = getAllrounderPlayers(iplMostRunsList, iplMostWicketsList);
+
     playersList.sort([](const IPLPlayerDetails firstPlayer, const IPLPlayerDetails secondPlayer)
     {return ((firstPlayer.bowlingAverage != 0 && secondPlayer.bowlingAverage != 0) ? firstPlayer.bowlingAverage < secondPlayer.bowlingAverage : bool()) &&
     firstPlayer.battingAverage > secondPlayer.battingAverage; });
+}
+
+void SortedPlayerData :: sortDataByWicketsAndRuns(list<IPLPlayerDetails>& playersList, list<IPLPlayerDetails> iplMostRunsList, list<IPLPlayerDetails> iplMostWicketsList)
+{
+    playersList = getAllrounderPlayers(iplMostRunsList, iplMostWicketsList);
+
+    playersList.sort([](const IPLPlayerDetails firstPlayer, const IPLPlayerDetails secondPlayer)
+    {return  firstPlayer.wickets > secondPlayer.wickets && firstPlayer.runs > secondPlayer.runs; });
 }
