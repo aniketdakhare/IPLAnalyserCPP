@@ -64,7 +64,8 @@ int IPLAnalyserView :: getChoiceOfSorting()
     << "\n8: Top Striking Rates of the Bowlers \n9: Bowlers who had the best economy rate"
     << "\n10: Cricketers who had best striking rates with 5w and 4w \n11: Cricketers who had great bowling averages with the best striking rates "
     << "\n12: Bowlers who took maximum wickets with best best bowling averages "
-    << "\n13: Cricketers who had the best Batting and Bowling averages \n14: Exit" << endl;
+    << "\n13: Cricketers who had the best Batting and Bowling averages \n14: Cricketers who are the best all rounders that means the most runs and wickets in the IPL season"
+    << "\n15: Exit" << endl;
     cin >> choice;
     return choice;
 }
