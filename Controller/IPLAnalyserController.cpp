@@ -33,7 +33,10 @@ class IPLAnalyserController
                 case BATTING_AVERAGE_WITH_STRIKE_RATE:
                     sortedList = iplAnalyser.getSortedData(BATTING_AVERAGE_WITH_STRIKE_RATE);
                     break;
-                case 6:
+                case RUNS_WITH_BATTING_AVERAGE:
+                    sortedList = iplAnalyser.getSortedData(RUNS_WITH_BATTING_AVERAGE);
+                    break;
+                case 7:
                     exit(0);
                 default:
                     iplIO.defaultMassege();

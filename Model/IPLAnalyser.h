@@ -59,6 +59,10 @@ list<IPLBatsmanData> IPLAnalyser :: getSortedData(SortType sortType)
             playersList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
             {return firstBatsman.average > secondBatsman.average && firstBatsman.strikeRate > secondBatsman.strikeRate; });
             break;
+        case RUNS_WITH_BATTING_AVERAGE:
+            playersList.sort([](const IPLBatsmanData firstBatsman, const IPLBatsmanData secondBatsman)
+            {return firstBatsman.runs > secondBatsman.runs && firstBatsman.average > secondBatsman.average; });
+            break;
     }
     
     return playersList;

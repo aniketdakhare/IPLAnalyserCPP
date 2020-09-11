@@ -26,7 +26,7 @@ void IPLAnalyserView::displayTopAvgBatsman(list<IPLBatsmanData> topBatsmans)
     for (auto playerDetails = topBatsmans.begin(); count < 10 ; playerDetails++ , count++)
     {
         cout << "\nNAME: " << playerDetails->playerName << "\nAVERAGE: " << playerDetails->average << "\nSTRIKE RATE: " << playerDetails->strikeRate
-        << "\n4's: " << playerDetails->fours << "\n6's: " << playerDetails->sixes << endl;
+        << "\nRuns: " << playerDetails->runs << "\n4's: " << playerDetails->fours << "\n6's: " << playerDetails->sixes << endl;
     }   
 }
 
@@ -35,7 +35,9 @@ int IPLAnalyserView :: getChoiceOfSorting()
     int choice;
     cout << "\nSelect Choice for displaying data: \n1: Top batting averages of the Cricketers \n2: Top Striking rate of batsman"
     << "\n3: Cricketers who hit maximum 6s and 4s \n4: Cricketers who had best striking rates with 6s and 4s"
-    << "\n5: Cricketers who had great averages with the best striking rates possible \n6: Exit" << endl;
+    << "\n5: Cricketers who had great averages with the best striking rates possible"
+    << "\n6: Cricketers who hit maximum runs with best averages \n7: Exit" << endl;
+
     cin >> choice;
     return choice;
 }
