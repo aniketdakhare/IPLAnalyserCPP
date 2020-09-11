@@ -59,8 +59,11 @@ class IPLAnalyserController
                     case ECONOMY_RATE:
                         sortedList = iplAnalyser.getSortedData(ECONOMY_RATE);
                         iplIO.displayBowler(sortedList);
-                        break;                    
-                    case 10:
+                        break;
+                    case STRIKE_RATE_WITH_FOUR_AND_FIVE_WICKETS:
+                        sortedList = iplAnalyser.getSortedData(STRIKE_RATE_WITH_FOUR_AND_FIVE_WICKETS);
+                        iplIO.displayBowler(sortedList);
+                        break;       
                         exit(0);
                     default:
                         iplIO.defaultMassege();
