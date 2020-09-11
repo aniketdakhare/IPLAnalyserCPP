@@ -83,6 +83,11 @@ list<IPLPlayerDetails> IPLAnalyser :: getSortedData(SortType sortType)
             playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
             {return firstBatsman.bowlingStrikeRates < secondBatsman.bowlingStrikeRates; });
             break;
+        case STRIKE_RATE_WITH_FOUR_AND_FIVE_WICKETS:
+            playersList = iplMostWicketsList;
+            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
+            {return firstBatsman.bowlingStrikeRates < secondBatsman.bowlingStrikeRates && (firstBatsman.fiveWickets + firstBatsman.fourWickets) > (secondBatsman.fiveWickets + secondBatsman.fourWickets); });
+            break;
     }
     
     return playersList;
