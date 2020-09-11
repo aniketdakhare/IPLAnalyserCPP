@@ -72,7 +72,11 @@ class IPLAnalyserController
                         sortedList = iplAnalyser.getSortedData(WICKETS_WITH_BOWLING_AVERAGE);
                         iplIO.displayBowler(sortedList);
                         break;
-                    case 13:
+                    case BATTING_AND_BOWLING_AVERAGE:
+                        sortedList = iplAnalyser.getSortedData(BATTING_AND_BOWLING_AVERAGE);
+                        iplIO.displayAllrounder(sortedList);
+                        break;
+                    case 14:
                         exit(0);
                     default:
                         iplIO.defaultMassege();
