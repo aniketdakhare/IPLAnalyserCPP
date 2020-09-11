@@ -2,6 +2,7 @@
 #include "../model/IPLAnalyser.h"
 
 #define MOST_RUNS_FILE_PATH "../resources/IPL2019FactsheetMostRuns.csv"
+#define MOST_WICKETS_FILE_PATH "../resources/IPL2019FactsheetMostWkts.csv"
 
 using namespace std;
 
@@ -10,51 +11,54 @@ class IPLAnalyserController
     IPLAnalyserView iplIO;
     IPLAnalyser iplAnalyser;
 
-    private:
-        list<IPLBatsmanData> getSortedListOfPlayersData()
-        {
-            list<IPLBatsmanData> sortedList;
-            int choice = iplIO.getChoiceOfSorting();
-            
-            switch (choice)
-            {
-                case AVERAGE:
-                    sortedList = iplAnalyser.getSortedData(AVERAGE);
-                    break;
-                case STRIKE_RATE:
-                    sortedList = iplAnalyser.getSortedData(STRIKE_RATE);
-                    break;
-                case FOURS_AND_SIXES:
-                    sortedList = iplAnalyser.getSortedData(FOURS_AND_SIXES);
-                    break;
-                case STRIKE_RATE_WITH_SIX_AND_FOUR:
-                    sortedList = iplAnalyser.getSortedData(STRIKE_RATE_WITH_SIX_AND_FOUR);
-                    break;
-                case BATTING_AVERAGE_WITH_STRIKE_RATE:
-                    sortedList = iplAnalyser.getSortedData(BATTING_AVERAGE_WITH_STRIKE_RATE);
-                    break;
-                case RUNS_WITH_BATTING_AVERAGE:
-                    sortedList = iplAnalyser.getSortedData(RUNS_WITH_BATTING_AVERAGE);
-                    break;
-                case 7:
-                    exit(0);
-                default:
-                    iplIO.defaultMassege();
-            }
-            
-            return sortedList;;
-        }
-
     public:
-        void displaySortedData() 
+        void displaySortedListOfPlayersData()
         {
+            list<IPLPlayerDetails> sortedList;
             iplIO.displayWelcomeMessage();
-            iplAnalyser.loadIPLData(MOST_RUNS_FILE_PATH); 
-
+            iplAnalyser.loadIPLData(MOST_RUNS_FILE_PATH, BATSMAN);
+            iplAnalyser.loadIPLData(MOST_WICKETS_FILE_PATH, BOWLER); 
+            
             while (true)
             {
-                iplIO.displayTopAvgBatsman(getSortedListOfPlayersData());
+                int choice = iplIO.getChoiceOfSorting();
+                switch (choice)
+                {
+                    case BATTING_AVERAGE:
+                        sortedList = iplAnalyser.getSortedData(BATTING_AVERAGE);
+                        iplIO.displayBatsman(sortedList);
+                        break;
+                    case BATTING_STRIKE_RATE:
+                        sortedList = iplAnalyser.getSortedData(BATTING_STRIKE_RATE);
+                        iplIO.displayBatsman(sortedList);
+                        break;
+                    case FOURS_AND_SIXES:
+                        sortedList = iplAnalyser.getSortedData(FOURS_AND_SIXES);
+                        iplIO.displayBatsman(sortedList);
+                        break;
+                    case STRIKE_RATE_WITH_SIX_AND_FOUR:
+                        sortedList = iplAnalyser.getSortedData(STRIKE_RATE_WITH_SIX_AND_FOUR);
+                        iplIO.displayBatsman(sortedList);
+                        break;
+                    case BATTING_AVERAGE_WITH_STRIKE_RATE:
+                        sortedList = iplAnalyser.getSortedData(BATTING_AVERAGE_WITH_STRIKE_RATE);
+                        iplIO.displayBatsman(sortedList);
+                        break;
+                    case RUNS_WITH_BATTING_AVERAGE:
+                        sortedList = iplAnalyser.getSortedData(RUNS_WITH_BATTING_AVERAGE);
+                        iplIO.displayBatsman(sortedList);
+                        break;
+                    case BOWLING_AVERAGE:
+                        sortedList = iplAnalyser.getSortedData(BOWLING_AVERAGE);
+                        iplIO.displayBowler(sortedList);
+                        break;
+                    case 8:
+                        exit(0);
+                    default:
+                        iplIO.defaultMassege();
+                }
             }
+                      
         }
 };
 
@@ -62,6 +66,6 @@ int main()
 {
     IPLAnalyserController controller;
 
-    controller.displaySortedData();
+    controller.displaySortedListOfPlayersData();
     return 0;
 }
