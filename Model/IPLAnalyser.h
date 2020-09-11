@@ -78,6 +78,11 @@ list<IPLPlayerDetails> IPLAnalyser :: getSortedData(SortType sortType)
             playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
             {return (firstBatsman.bowlingStrikeRates != 0 && secondBatsman.bowlingStrikeRates != 0) ? firstBatsman.bowlingStrikeRates < secondBatsman.bowlingStrikeRates : bool(); });
             break;
+        case ECONOMY_RATE:
+            playersList = iplMostWicketsList;
+            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
+            {return firstBatsman.bowlingStrikeRates < secondBatsman.bowlingStrikeRates; });
+            break;
     }
     
     return playersList;

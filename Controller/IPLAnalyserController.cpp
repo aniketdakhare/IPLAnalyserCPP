@@ -56,7 +56,11 @@ class IPLAnalyserController
                         sortedList = iplAnalyser.getSortedData(BOWLING_STRIKE_RATE);
                         iplIO.displayBowler(sortedList);
                         break;
-                    case 9:
+                    case ECONOMY_RATE:
+                        sortedList = iplAnalyser.getSortedData(ECONOMY_RATE);
+                        iplIO.displayBowler(sortedList);
+                        break;                    
+                    case 10:
                         exit(0);
                     default:
                         iplIO.defaultMassege();
