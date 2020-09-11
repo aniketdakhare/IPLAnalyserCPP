@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+#include "SortedPlayerData.h"
 #include "../model/utility/IPLAdapterFactory.h"
 #include "../model/Enums/PlayerType.h"
 #include "../Model/Enums/SortType.h"
@@ -7,7 +8,7 @@
 
 using namespace std;
 
-class IPLAnalyser
+class IPLAnalyser : SortedPlayerData
 {
     private:
         list<IPLPlayerDetails> iplMostRunsList;
@@ -39,67 +40,43 @@ list<IPLPlayerDetails> IPLAnalyser :: getSortedData(SortType sortType)
     switch(sortType)
     {
         case BATTING_AVERAGE:
-            playersList = iplMostRunsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return firstBatsman.battingAverage > secondBatsman.battingAverage; });
+            sortDataByBattingAverage(playersList, iplMostRunsList);
             break;
         case BATTING_STRIKE_RATE:
-            playersList = iplMostRunsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return firstBatsman.battingStrikeRates > secondBatsman.battingStrikeRates; });
+            sortDataByBattingStrikeRate(playersList, iplMostRunsList);
             break;
         case FOURS_AND_SIXES:
-            playersList = iplMostRunsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return (firstBatsman.fours + firstBatsman.sixes) > (secondBatsman.fours +secondBatsman.sixes); });
+            sortDataByFoursAndSixes(playersList, iplMostRunsList);
             break;
         case STRIKE_RATE_WITH_SIX_AND_FOUR:
-            playersList = iplMostRunsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return firstBatsman.battingStrikeRates > secondBatsman.battingStrikeRates && (firstBatsman.fours + firstBatsman.sixes) > (secondBatsman.fours +secondBatsman.sixes); });
+            sortDataByStrikeRateWithSixAndFour(playersList, iplMostRunsList);
             break;
         case BATTING_AVERAGE_WITH_STRIKE_RATE:
-            playersList = iplMostRunsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return firstBatsman.battingAverage > secondBatsman.battingAverage && firstBatsman.battingStrikeRates > secondBatsman.battingStrikeRates; });
+            sortDataByBattingAverageWithStrikeRate(playersList, iplMostRunsList);
             break;
         case RUNS_WITH_BATTING_AVERAGE:
-            playersList = iplMostRunsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return firstBatsman.runs > secondBatsman.runs && firstBatsman.battingAverage > secondBatsman.battingAverage; });
+            sortDataByRunsWithBattingAverage(playersList, iplMostRunsList);
             break;
         case BOWLING_AVERAGE:
-            playersList = iplMostWicketsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return (firstBatsman.bowlingAverage != 0 && secondBatsman.bowlingAverage != 0) ? firstBatsman.bowlingAverage < secondBatsman.bowlingAverage : bool(); });
+            sortDataByBowlingAverage(playersList, iplMostWicketsList);
             break;
         case BOWLING_STRIKE_RATE:
-            playersList = iplMostWicketsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return (firstBatsman.bowlingStrikeRates != 0 && secondBatsman.bowlingStrikeRates != 0) ? firstBatsman.bowlingStrikeRates < secondBatsman.bowlingStrikeRates : bool(); });
+            sortDataByBowlingStrikRate(playersList, iplMostWicketsList);
             break;
         case ECONOMY_RATE:
-            playersList = iplMostWicketsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return firstBatsman.bowlingStrikeRates < secondBatsman.bowlingStrikeRates; });
+            sortDataByBowlingEconomyRate(playersList, iplMostWicketsList);
             break;
         case STRIKE_RATE_WITH_FOUR_AND_FIVE_WICKETS:
-            playersList = iplMostWicketsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return ((firstBatsman.bowlingStrikeRates != 0 && secondBatsman.bowlingStrikeRates != 0) ? firstBatsman.bowlingStrikeRates < secondBatsman.bowlingStrikeRates : bool()) && 
-            (firstBatsman.fiveWickets + firstBatsman.fourWickets) > (secondBatsman.fiveWickets + secondBatsman.fourWickets); });
+            sortDataByStrikeRateWithFourAndFiveWickets(playersList, iplMostWicketsList);
             break;
         case BOWLING_AVERAGE_WITH_STRIKE_RATE:
-            playersList = iplMostWicketsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return ((firstBatsman.bowlingAverage != 0 && secondBatsman.bowlingAverage != 0) ? firstBatsman.bowlingAverage < secondBatsman.bowlingAverage : bool()) &&
-            ((firstBatsman.bowlingStrikeRates != 0 && secondBatsman.bowlingStrikeRates != 0) ? firstBatsman.bowlingStrikeRates < secondBatsman.bowlingStrikeRates : bool()); });
+            sortDataByBowlingAverageWithStrikeRate(playersList, iplMostWicketsList);
             break;
         case WICKETS_WITH_BOWLING_AVERAGE:
-            playersList = iplMostWicketsList;
-            playersList.sort([](const IPLPlayerDetails firstBatsman, const IPLPlayerDetails secondBatsman)
-            {return ((firstBatsman.bowlingAverage != 0 && secondBatsman.bowlingAverage != 0) ? firstBatsman.bowlingAverage < secondBatsman.bowlingAverage : bool()) &&
-            firstBatsman.wickets > secondBatsman.wickets; });
+            sortDataByWicketsWithBowlingAverage(playersList, iplMostWicketsList);
+            break;
+        case BATTING_AND_BOWLING_AVERAGE:
+            sortDataByBowlingAndBattingAverage(playersList, iplMostRunsList, iplMostWicketsList);
             break;
     }
     
