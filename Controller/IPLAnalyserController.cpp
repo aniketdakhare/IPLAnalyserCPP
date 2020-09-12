@@ -84,7 +84,11 @@ class IPLAnalyserController
                         sortedList = iplAnalyser.getSortedData(HUNDRED_AND_AVERAGE);
                         iplIO.displayBatsman(sortedList);
                         break;
-                    case 16:
+                    case ZERO_HUNDREDS_FIFTIES_WITH_BEST_AVERAGE:
+                        sortedList = iplAnalyser.getSortedData(ZERO_HUNDREDS_FIFTIES_WITH_BEST_AVERAGE);
+                        iplIO.displayBatsman(sortedList);
+                        break;                        
+                    case 17:
                         exit(0);
                     default:
                         iplIO.defaultMassege();
