@@ -24,6 +24,7 @@ class SortedPlayerData
         void sortDataByBowlingAndBattingAverage(list<IPLPlayerDetails>& , list<IPLPlayerDetails> , list<IPLPlayerDetails>);
         void sortDataByWicketsAndRuns(list<IPLPlayerDetails>& , list<IPLPlayerDetails> , list<IPLPlayerDetails>);
         void sortDataByHundredsAndAverage(list<IPLPlayerDetails>& , list<IPLPlayerDetails>);
+        void sortDataByZeroHundredsAndFiftiesWithAverages(list<IPLPlayerDetails>& , list<IPLPlayerDetails>);
 };
 
 void SortedPlayerData :: sortDataByBattingAverage(list<IPLPlayerDetails>& playersList, list<IPLPlayerDetails> iplMostRunsList)
@@ -159,4 +160,18 @@ void SortedPlayerData :: sortDataByHundredsAndAverage(list<IPLPlayerDetails>& pl
     playersList = iplMostRunsList;
     playersList.sort([](const IPLPlayerDetails firstPlayer, const IPLPlayerDetails secondPlayer)
     {return firstPlayer.hundreds > secondPlayer.hundreds && firstPlayer.fifties > secondPlayer.fifties; });
+}
+
+void SortedPlayerData :: sortDataByZeroHundredsAndFiftiesWithAverages(list<IPLPlayerDetails>& playersList, list<IPLPlayerDetails> iplMostRunsList)
+{
+    for (auto battingDetails = iplMostRunsList.begin(); battingDetails != iplMostRunsList.end(); battingDetails++)
+    {
+        if (battingDetails->hundreds == 0 && battingDetails->fifties == 0)
+        {
+            playersList.push_back(*battingDetails);
+        }
+    }
+    
+    playersList.sort([](const IPLPlayerDetails firstPlayer, const IPLPlayerDetails secondPlayer)
+    {return firstPlayer.battingAverage > secondPlayer.battingAverage; });
 }

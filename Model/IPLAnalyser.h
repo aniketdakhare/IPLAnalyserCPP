@@ -84,6 +84,9 @@ list<IPLPlayerDetails> IPLAnalyser :: getSortedData(SortType sortType)
         case HUNDRED_AND_AVERAGE:
             sortDataByHundredsAndAverage(playersList, iplMostRunsList);
             break;
+        case ZERO_HUNDREDS_FIFTIES_WITH_BEST_AVERAGE:
+            sortDataByZeroHundredsAndFiftiesWithAverages(playersList, iplMostRunsList);
+            break;
     }
     
     return playersList;

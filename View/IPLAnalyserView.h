@@ -68,7 +68,8 @@ int IPLAnalyserView :: getChoiceOfSorting()
     << "\n13: Cricketers who had the best Batting and Bowling averages" 
     << "\n14: Cricketers who are the best all rounders that means the most runs and wickets in the IPL season"
     << "\n15: Cricketers who hit maximum hundreds and had best batting averages"
-    << "\n16: Exit" << endl;
+    << "\n16: Cricketers who hit zero 100s and 50s but had best batting averages"
+    << "\n17: Exit" << endl;
     cin >> choice;
     return choice;
 }
